@@ -199,6 +199,14 @@ require("mason-tool-installer").setup({
 	},
 })
 
+vim.lsp.config("tailwindcss", {
+	settings = {
+		tailwindCSS = {
+			colorDecorators = false,
+		},
+	},
+})
+
 vim.lsp.enable({
 	"vtsls", -- JS/TS
 	"tailwindcss", -- TailwindCSS
