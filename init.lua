@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 vim.o.background = "dark"
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.showmode = false
+-- vim.o.showmode = false
 vim.o.signcolumn = "yes"
 vim.o.termguicolors = true
 vim.o.winborder = "rounded"
@@ -88,7 +88,7 @@ vim.pack.add({
 })
 --
 
--- which-key
+--: which-key
 vim.pack.add({
 	{ src = "https://github.com/folke/which-key.nvim" },
 })
@@ -96,7 +96,7 @@ vim.pack.add({
 require("which-key").setup({})
 --
 
--- undotree
+--: undotree
 vim.pack.add({
 	{ src = "https://github.com/mbbill/undotree" },
 })
@@ -104,7 +104,7 @@ vim.pack.add({
 vim.keymap.set("n", "<leader>u", "<Cmd>UndotreeToggle<CR>", { desc = "Toggle Undotree" })
 --
 
--- gitsigns
+--: gitsigns
 vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
@@ -177,10 +177,7 @@ vim.pack.add({
 })
 require("oil").setup()
 require("Otree").setup()
-vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Oil" })
-vim.keymap.set("n", "<leader>ef", "<CMD>Oil --float<CR>", { desc = "Oil: float" })
-vim.keymap.set("n", "<leader>o", "<CMD>Otree<CR>", { desc = "Otree" })
-vim.keymap.set("n", "<leader>of", "<CMD>OtreeFocus<CR>", { desc = "Otree: focus" })
+vim.keymap.set("n", "<leader>e", "<CMD>Otree<CR>", { desc = "Otree" })
 --
 
 -- LSP
@@ -213,17 +210,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local map = vim.keymap.set
 		local fzf = require("fzf-lua")
 
-		map("n", "gd", fzf.lsp_definitions, { buffer = args.buf, desc = "LSP Definitions" })
-		map("n", "gr", fzf.lsp_references, { buffer = args.buf, desc = "LSP References" })
-		map("n", "gi", fzf.lsp_implementations, { buffer = args.buf, desc = "LSP Implementations" })
-		map("n", "gt", fzf.lsp_typedefs, { buffer = args.buf, desc = "LSP Type Definitions" })
-		map("n", "<leader>s", fzf.lsp_document_symbols, { buffer = args.buf, desc = "LSP Document Symbols" })
-		map("n", "<leader>S", fzf.lsp_live_workspace_symbols, { buffer = args.buf, desc = "LSP Workspace Symbols" })
-		map("n", "<leader>ca", fzf.lsp_code_actions, { buffer = args.buf, desc = "LSP Code Actions" })
-		map("n", "<leader>d", fzf.diagnostics_document, { buffer = args.buf, desc = "LSP Document Diagnostics" })
-		map("n", "<leader>D", fzf.diagnostics_workspace, { buffer = args.buf, desc = "LSP Workspace Diagnostics" })
-		map("n", "K", vim.lsp.buf.hover, { buffer = args.buf, desc = "LSP Hover" })
-		map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = args.buf, desc = "LSP Rename" })
+		map("n", "gd", fzf.lsp_definitions, { buffer = args.buf, desc = "[G]oto [D]efinition" })
+		map("n", "gr", fzf.lsp_references, { buffer = args.buf, desc = "[G]oto [R]eferences" })
+		map("n", "gi", fzf.lsp_implementations, { buffer = args.buf, desc = "[G]oto [I]mplementation" })
+		map("n", "gt", fzf.lsp_typedefs, { buffer = args.buf, desc = "[G]oto [T]ype Definition" })
+		map("n", "gO", fzf.lsp_document_symbols, { buffer = args.buf, desc = "Open Document Symbols" })
+		map("n", "gW", fzf.lsp_live_workspace_symbols, { buffer = args.buf, desc = "Open Workspace Symbols" })
+		map("n", "ga", fzf.lsp_code_actions, { buffer = args.buf, desc = "[G]oto Code [A]ction" })
+		map("n", "<leader>d", fzf.diagnostics_document, { buffer = args.buf, desc = "Open Document Diagnostics" })
+		map("n", "<leader>D", fzf.diagnostics_workspace, { buffer = args.buf, desc = "Open Workspace Diagnostics" })
+		map("n", "grn", vim.lsp.buf.rename, { buffer = args.buf, desc = "R]e[n]ame" })
 	end,
 })
 --
@@ -310,12 +306,20 @@ vim.keymap.set({ "n", "v" }, "<leader>f", function()
 end, { desc = "Format file or range" })
 --:
 
--- lazygit
+-- grug-far
 vim.pack.add({
-	{ src = "https://github.com/kdheepak/lazygit.nvim" },
+	{ src = "https://github.com/MagicDuck/grug-far.nvim" },
 })
+require("grug-far").setup({})
 
-vim.keymap.set("n", "<leader>lg", "<CMD>Lazygit<CR>", { desc = "Lazygit" })
+vim.keymap.set("n", "<leader>sr", function()
+	require("grug-far").open()
+end, { desc = "Search & Replace" })
+
+vim.keymap.set("v", "<leader>sr", function()
+	require("grug-far").open({ visualSelectionUsedAsSearchString = true })
+end, { desc = "Search & Replace (selection)" })
+
 --
 
 --: bufferline
@@ -334,11 +338,11 @@ vim.keymap.set("n", "<leader>lg", "<CMD>Lazygit<CR>", { desc = "Lazygit" })
 --
 
 --: lualine
--- vim.pack.add({
--- 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
--- })
--- require("lualine").setup({})
+vim.pack.add({
+	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+})
+require("lualine").setup({})
 --
 
 -- Done specifying packages. Update them all!
-vim.pack.update(nil, { force = true })
+-- vim.pack.update(nil, { force = true })

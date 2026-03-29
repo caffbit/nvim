@@ -26,12 +26,16 @@
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
-      "rev": "a462f416e2ce4744531c6256252dee99a7d34a83",
+      "rev": "50c205548d8b037b7ff6378fca6d21146f0b6161",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
-    "lazygit.nvim": {
-      "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
-      "src": "https://github.com/kdheepak/lazygit.nvim"
+    "grug-far.nvim": {
+      "rev": "dc4684e163971bb1f5bfb93fbd4bb3e892bf9b15",
+      "src": "https://github.com/MagicDuck/grug-far.nvim"
+    },
+    "lualine.nvim": {
+      "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-tool-installer.nvim": {
       "rev": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc",
@@ -42,11 +46,11 @@
       "src": "https://github.com/williamboman/mason.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "1a6d69206749a646ef28bfb39460610b14baff40",
+      "rev": "97774019cb17697f35872b28bc020a72b4ca1b51",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "6620ae1c44dfa8623b22d0cbf873a9e8d073b849",
+      "rev": "f059649bc39ab39d55f2a165db752c956897d4fd",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
