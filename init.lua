@@ -4,7 +4,7 @@ vim.g.mapleader = " "
 vim.o.background = "dark"
 vim.o.number = true
 vim.o.relativenumber = true
--- vim.o.showmode = false
+vim.o.showmode = false
 vim.o.signcolumn = "yes"
 vim.o.termguicolors = true
 vim.o.winborder = "rounded"
@@ -20,6 +20,7 @@ vim.o.backup = false
 vim.o.swapfile = false
 vim.o.updatetime = 50
 vim.o.scrolloff = 8
+vim.o.cursorline = false
 
 -- Enable automatic reading of external changes
 vim.o.autoread = true
@@ -155,17 +156,29 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 --:
 
--- fzf-lua
+--: vim-tmux-navigator
+vim.pack.add({
+	{ src = "https://github.com/christoomey/vim-tmux-navigator" },
+})
+
+vim.keymap.set("n", "<C-h>", "<Cmd>TmuxNavigateLeft<CR>", { desc = "Tmux Navigate Left" })
+vim.keymap.set("n", "<C-j>", "<Cmd>TmuxNavigateDown<CR>", { desc = "Tmux Navigate Down" })
+vim.keymap.set("n", "<C-k>", "<Cmd>TmuxNavigateUp<CR>", { desc = "Tmux Navigate Up" })
+vim.keymap.set("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>", { desc = "Tmux Navigate Right" })
+vim.keymap.set("n", "<C-\\>", "<Cmd>TmuxNavigatePrevious<CR>", { desc = "Tmux Navigate Previous" })
+--
+
+--: fzf-lua
 vim.pack.add({
 	{ src = "https://github.com/ibhagwan/fzf-lua" },
 })
 
 require("fzf-lua").setup()
 
-vim.keymap.set("n", "<C-\\>", "<Cmd>lua require('fzf-lua').buffers()<CR>", { desc = "FZF Buffers" })
-vim.keymap.set("n", "<C-k>", "<Cmd>lua require('fzf-lua').builtin()<CR>", { desc = "FZF Builtin" })
+vim.keymap.set("n", "<C-b>", "<Cmd>lua require('fzf-lua').buffers()<CR>", { desc = "FZF Buffers" })
+vim.keymap.set("n", "<leader>k", "<Cmd>lua require('fzf-lua').builtin()<CR>", { desc = "FZF Builtin" })
 vim.keymap.set("n", "<C-p>", "<Cmd>lua require('fzf-lua').files()<CR>", { desc = "FZF Files" })
-vim.keymap.set("n", "<C-l>", "<Cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "FZF Live Grep" })
+vim.keymap.set("n", "<C-f>", "<Cmd>lua require('fzf-lua').live_grep()<CR>", { desc = "FZF Live Grep" })
 vim.keymap.set("n", "<C-g>", "<Cmd>lua require('fzf-lua').grep_project()<CR>", { desc = "FZF Grep Project" })
 vim.keymap.set("n", "<F1>", "<Cmd>lua require('fzf-lua').help_tags()<CR>", { desc = "FZF Help Tags" })
 --
@@ -176,7 +189,10 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 })
 require("oil").setup()
-require("Otree").setup()
+require("Otree").setup({
+	show_hidden = true,
+	show_ignore = true,
+})
 vim.keymap.set("n", "<leader>e", "<CMD>Otree<CR>", { desc = "Otree" })
 --
 
@@ -327,7 +343,25 @@ end, { desc = "Search & Replace" })
 vim.keymap.set("v", "<leader>sr", function()
 	require("grug-far").open({ visualSelectionUsedAsSearchString = true })
 end, { desc = "Search & Replace (selection)" })
+--
 
+--: todo-comments
+vim.pack.add({
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/folke/todo-comments.nvim" },
+})
+
+require("todo-comments").setup({})
+
+vim.keymap.set("n", "]t", function()
+	require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+	require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+vim.keymap.set("n", "<leader>st", "<Cmd>TodoFzfLua<CR>", { desc = "Search Todos (FzfLua)" })
 --
 
 --: bufferline
